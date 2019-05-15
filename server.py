@@ -55,7 +55,7 @@ def new_question():
         new_question['title'] = request.form.get('title')
         new_question['message'] = request.form.get('message')
         new_question['image'] = None
-        global new_question
+        global questions
         questions.update({id: new_question})
         connection.write_all_questions(questions)
         questions = data_manager.get_questions()
