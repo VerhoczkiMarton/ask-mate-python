@@ -61,7 +61,7 @@ def new_question():
         questions = data_manager.get_questions()
         return redirect(f'/question/{question_id}')
     elif request.method == 'GET':
-        return render_template('add_question.html', question_id=question_id)
+        return render_template('add_question.html')
 
 if __name__ == '__main__':
     app.run(
