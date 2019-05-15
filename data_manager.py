@@ -15,7 +15,7 @@ def get_answers():
     return answers
 
 
-def get_questions()
+def get_questions():
     """
     Return a nested dictionary of questions
     {id : {other data}}
