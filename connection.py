@@ -19,3 +19,9 @@ def get_all_questions():
 
 def write_all():
     pass
+
+
+def get_headers(file):
+    with open(f'{file}.csv', 'r') as f:
+        headers = f.readline().strip().split(',')
+    return headers
