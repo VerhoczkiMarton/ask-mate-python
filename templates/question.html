@@ -22,5 +22,26 @@
         {% endfor %}
         </tr>
     </table>
+    <h2>Answers</h2>
+    <table>
+        <tr>
+            <th>Submission time</th>
+            <th>Vote number</th>
+            <th>Question id</th>
+            <th>Message</th>
+            <th>image</th>
+        </tr>
+        {% for answer in answers %}
+        <tr>
+            {% for cell in answer.values() %}
+                <td>{{cell}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <form action="/question/{{ question_id }}/new-answer" method="get">
+        <button type="submit">Add new answer</button>
+    </form>
+
 </body>
 </html>
