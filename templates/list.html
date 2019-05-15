@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Questions</title>
 </head>
 <body>
+<table>
+    {% for id, question in questions.items() %}
 
+        <tr>
+        {% for value in question.values() %}
+            <td> {{ value }} </td>
+        {% endfor %}
+        </tr>
+
+    {% endfor %}
+</table>
 </body>
 </html>
