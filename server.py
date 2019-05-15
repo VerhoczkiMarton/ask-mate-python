@@ -9,16 +9,14 @@ import datetime
 app = Flask(__name__)
 questions = data_manager.get_questions()
 answers = data_manager.get_answers()
-QUESTION_HEADERS = connection.get_headers('questions')
-ANSWER_HEADERS = connection.get_headers('answers')
+QUESTION_HEADERS = ['Submission time', 'View number', 'Vote number', 'Title', 'Message', 'Image']
+ANSWER_HEADERS = ['Submission time', 'Vote number', 'Question id', 'Message', 'Image']
 
 
 @app.route('/list')
 def route_list():
     questions = data_manager.get_questions()
-    return render_template('list.html', questions=questions)
-
-    pass
+    return render_template('list.html', questions=questions, headers = QUESTION_HEADERS)
 
 
 @app.route('/question/<question_id>')
