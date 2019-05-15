@@ -12,7 +12,7 @@ ANSWER_HEADERS = ['Submission time', 'Vote number', 'Question id', 'Message', 'I
 @app.route('/list')
 def route_list():
     questions = data_manager.get_questions()
-    return render_template('list.html', questions=questions)
+    return render_template('list.html', questions=questions, headers = QUESTION_HEADERS)
 
     pass
 

@@ -6,6 +6,12 @@
 </head>
 <body>
 <table>
+
+    <tr>
+        {% for header in headers %}
+        <th> {{ header }}</th>
+        {% endfor %}
+    </tr>
     {% for id, question in questions.items() %}
 
         <tr>
