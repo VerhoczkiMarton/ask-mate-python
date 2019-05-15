@@ -16,16 +16,14 @@ ANSWER_HEADERS = ['Submission time', 'Vote number', 'Question id', 'Message', 'I
 @app.route('/list')
 def route_list():
     questions = data_manager.get_questions()
-    util.convert_timestamp(questions, answers)
     return render_template('list.html', questions=questions, headers = QUESTION_HEADERS)
 
 
 @app.route('/question/<question_id>')
 def display_question(question_id):
-    util.convert_timestamp(questions, answers)
-    question = questions[question_id]
     answers_for_question = util.get_answers_for_question_id(question_id, answers)
-    return render_template('question.html', question=question, question_id=question_id, answers=answers_for_question)
+    return render_template('question.html', question_id=question_id, answers=answers_for_question, questions=questions)
+
 
 @app.route('/question/<question_id>/new-answer', methods=['GET', 'POST'])
 def new_answer(question_id):
@@ -43,7 +41,7 @@ def new_answer(question_id):
         answers = data_manager.get_answers()
         return redirect(f'/question/{question_id}')
     else:
-        return render_template('new_answer.html',question_id=question_id )
+        return render_template('new_answer.html', question_id=question_id)
 
 
 @app.route('/add-question')
