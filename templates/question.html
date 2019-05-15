@@ -17,8 +17,8 @@
             <th>image</th>
         </tr>
         <tr>
-        {% for cell in question.values() %}
-                <td>{{ cell }}</td>
+        {% for title, cell in question.items() %}
+                    <td>{{ cell }}</td>
         {% endfor %}
         </tr>
     </table>
@@ -33,8 +33,8 @@
         </tr>
         {% for answer in answers %}
         <tr>
-            {% for cell in answer.values() %}
-                <td>{{cell}}</td>
+            {% for title, cell in answer.items() %}
+                    <td>{{ cell }}</td>
             {% endfor %}
         </tr>
         {% endfor %}
