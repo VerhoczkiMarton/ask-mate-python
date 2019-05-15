@@ -1,6 +1,9 @@
 from csv import DictReader, DictWriter
 
 def get_all_answers():
+    """
+     Returns a list of all the answers
+    """
     all_answers = []
     input_file = DictReader(open("answers.csv"))
     for line in input_file:
@@ -9,6 +12,9 @@ def get_all_answers():
 
 
 def get_all_questions():
+    """
+     Returns a list of all the questions
+    """
     all_questions = []
     input_file = DictReader(open("questions.csv"))
     for line in input_file:
@@ -17,6 +23,9 @@ def get_all_questions():
 
 
 def write_all_questions(questions):
+    """
+    Writes the content of questions to the questions.csv file
+    """
     fieldnames = get_headers('questions')
     questions_list = []
     for id, content in questions.items():
@@ -32,6 +41,9 @@ def write_all_questions(questions):
 
 
 def write_all_answers(answers):
+    """
+    Writes the content of answers to the answers.csv file
+    """
     fieldnames = get_headers('answers')
     answers_list = []
     for id, content in answers.items():
@@ -46,6 +58,12 @@ def write_all_answers(answers):
 
 
 def get_headers(file):
+    """
+    Returns a list of all headers from file
+    :param file:
+    -answers
+    -questions
+    """
     with open(f'{file}.csv', 'r') as f:
         headers = f.readline().strip().split(',')
     return headers
