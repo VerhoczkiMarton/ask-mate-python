@@ -49,7 +49,8 @@ def new_question():
     if request.method == 'POST':
         new_question = dict()
         id = str(uuid.uuid4())
-        new_question['submission_time'] = datetime.datetime.now().timestamp()
+        new_question['id'] = id
+        new_question['submission_time'] = round(datetime.datetime.now().timestamp())
         new_question['view_number'] = 0
         new_question['vote_number'] = 0
         new_question['title'] = request.form.get('title')
@@ -59,7 +60,7 @@ def new_question():
         questions.update({id: new_question})
         connection.write_all_questions(questions)
         questions = data_manager.get_questions()
-        return redirect(f'/question/{question_id}')
+        return redirect('/')
     elif request.method == 'GET':
         return render_template('add_question.html')
 
