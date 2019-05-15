@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question</title>
+</head>
+<body>
+    <h1>Question</h1>
+    <p>ID: {{ question_id }}</p>
+    <table>
+        <tr>
+            <th>Submission time</th>
+            <th>View number</th>
+            <th>Vote number</th>
+            <th>Title</th>
+            <th>Message</th>
+            <th>image</th>
+        </tr>
+        <tr>
+        {% for cell in question.values() %}
+                <td>{{ cell }}</td>
+        {% endfor %}
+        </tr>
+    </table>
+</body>
+</html>
