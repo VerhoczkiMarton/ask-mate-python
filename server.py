@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/list')
 def route_list():
     questions = data_manager.get_questions()
-    return render_template('list.html', questions=questions, title="Questions")
+    return render_template('list.html', questions=questions)
 
     pass
 
