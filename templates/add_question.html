@@ -4,9 +4,17 @@
     <body>
         <h1>Ask a question </h1>
           <form action="question/new_question" method="post">
-            <p><label>Title</label><input type="text"></p>
-            <p><label>Message</label><textarea name="messsage" rows="20">Please write the message here </textarea></p>
-            <p><label>Image</label><input type="submit" value="Add new question"></p>
+              <br>
+              <label for="title">Title</label>
+              <input id="title" type="text">
+              <br>
+              <label for="message">Message</label>
+              <br>
+              <textarea id="message" name="messsage" rows="20">Please write the message here </textarea>
+              <br>
+              <label>Image</label>
+              <br>
+              <input type="submit" value="Add new question">
           </form>
     </body>
     </html>
