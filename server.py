@@ -39,7 +39,7 @@ def new_answer(question_id):
         answers.update({id : new_answer})
         connection.write_all_answers(answers)
         answers = data_manager.get_answers()
-        return redirect(f'/question/{question_id}')
+        return redirect('/')
     else:
         return render_template('new_answer.html', question_id=question_id)
 
