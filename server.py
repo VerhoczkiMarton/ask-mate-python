@@ -14,8 +14,6 @@ def route_list():
     questions = data_manager.get_questions()
     return render_template('list.html', questions=questions, headers = QUESTION_HEADERS)
 
-    pass
-
 
 @app.route('/question/<question_id>')
 def display_question(question_id):
