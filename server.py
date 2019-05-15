@@ -12,7 +12,7 @@ answers = data_manager.get_answers()
 QUESTION_HEADERS = ['Submission time', 'View number', 'Vote number', 'Title', 'Message', 'Image']
 ANSWER_HEADERS = ['Submission time', 'Vote number', 'Question id', 'Message', 'Image']
 
-
+@app.route('/')
 @app.route('/list')
 def route_list():
     questions = data_manager.get_questions()
