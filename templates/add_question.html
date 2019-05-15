@@ -1,25 +1,12 @@
 <DOCTYPE html>
-<html>
-<head> <title>Ask a question</title></head>
-<body>
-    <form>
-      <h1>Ask a question </h1>
-        <form>
-           <label>Title</label>
-            <br>
-              <input type="text">
-            <br>
-            <label>Message</label>
-            <br>
-            <textarea name="messsage" rows="20">Please write the message here </textarea>
-            <br>
-            <br>
-            <label>Image</label>
-            <br>
-        </form>
-        <form action ="http://0.0.0.0:8000/">
-        <input type="submit" value="Add new question">
-        </form>
-    </form>
-</body>
-</html>
+    <html>
+        <head><title>Ask a question</title></head>
+    <body>
+        <h1>Ask a question </h1>
+          <form action="question/{{question_id}}/new_question" method="post">
+            <p><label>Title</label><input type="text"></p>
+            <p><label>Message</label><textarea name="messsage" rows="20">Please write the message here </textarea></p>
+            <p><label>Image</label><input type="submit" value="Add new question"></p>
+          </form>
+    </body>
+    </html>
