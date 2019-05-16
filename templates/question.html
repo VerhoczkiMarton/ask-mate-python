@@ -18,7 +18,11 @@
         </tr>
         <tr>
         {% for title, cell in questions[question_id].items() %}
-                    <td>{{ cell }}</td>
+                {% if title == 'submission_time' %}
+                    <td>{{ convert(int(cell)) }}</td>
+                {% else %}
+                    <td> {{ cell }} </td>
+                {% endif %}
         {% endfor %}
         </tr>
     </table>
@@ -34,7 +38,11 @@
         {% for answer in answers %}
         <tr>
             {% for title, cell in answer.items() %}
-                    <td>{{ cell }}</td>
+                {% if title == 'submission_time' %}
+                    <td>{{ convert(int(cell)) }}</td>
+                {% else %}
+                    <td> {{ cell }} </td>
+                {% endif %}
             {% endfor %}
         </tr>
         {% endfor %}

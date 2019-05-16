@@ -3,10 +3,12 @@ import data_manager
 import connection
 import util
 import uuid
-import datetime
+from datetime import datetime
+import os
 
-
+os.environ['TZ'] = 'Europe/London'
 app = Flask(__name__)
+
 
 questions = data_manager.get_questions()
 answers = data_manager.get_answers()
@@ -18,7 +20,7 @@ ANSWER_HEADERS = ['Submission time', 'Vote number', 'Question id', 'Message', 'I
 @app.route('/list')
 def route_list():
     questions = data_manager.get_questions()
-    return render_template('list.html', questions=questions, headers=QUESTION_HEADERS)
+    return render_template('list.html', questions=questions, headers=QUESTION_HEADERS, convert=datetime.utcfromtimestamp, int=int)
 
 
 @app.route('/question/<question_id>')
@@ -26,7 +28,7 @@ def display_question(question_id):
     questions = data_manager.get_questions()
     answers_for_question = util.get_answers_for_question_id(question_id, answers)
 
-    return render_template('question.html', question_id=question_id, answers=answers_for_question, questions=questions)
+    return render_template('question.html', question_id=question_id, answers=answers_for_question, questions=questions, convert=datetime.utcfromtimestamp, int=int)
 
 
 @app.route('/question/<question_id>/new-answer', methods=['GET', 'POST'])
@@ -35,7 +37,7 @@ def new_answer(question_id):
         new_answer = dict()
         id = str(uuid.uuid4())
 
-        new_answer['submission_time'] = round(datetime.datetime.now().timestamp())
+        new_answer['submission_time'] = round(datetime.now().timestamp() + 7200)
         new_answer['vote_number'] = 0
         new_answer['question_id'] = question_id
         new_answer['message'] = request.form.get('message')
@@ -57,7 +59,7 @@ def new_question():
         id = str(uuid.uuid4())
 
         new_question['id'] = id
-        new_question['submission_time'] = round(datetime.datetime.now().timestamp())
+        new_question['submission_time'] = round(datetime.now().timestamp() + 7200)
         new_question['view_number'] = 0
         new_question['vote_number'] = 0
         new_question['title'] = request.form.get('title')
