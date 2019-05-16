@@ -4,9 +4,7 @@ import connection
 import util
 import uuid
 from datetime import datetime
-import os
 
-os.environ['TZ'] = 'Europe/London'
 app = Flask(__name__)
 
 
@@ -33,6 +31,16 @@ def route_list():
 
 
 def sorted_dict(dict_, by=None, direction='asc'):
+    """
+    :param dict_:
+        nested dictionary of questions or answers
+    :param by:
+        order parameter
+    :param direction:
+        asc or desc
+    :return:
+        same data structure as dict_, nested dictionary, ordered
+    """
     ordered_dict = dict()
     if not by:
         by = 'submission_time'
