@@ -55,13 +55,11 @@ def new_answer(question_id):
     if request.method == 'POST':
         new_answer = dict()
         id = str(uuid.uuid4())
-
         new_answer['submission_time'] = round(datetime.now().timestamp() + 7200)
         new_answer['vote_number'] = 0
         new_answer['question_id'] = question_id
         new_answer['message'] = request.form.get('message')
         new_answer['image'] = None
-
         global answers
         answers.update({id: new_answer})
         connection.write_all_answers(answers)
