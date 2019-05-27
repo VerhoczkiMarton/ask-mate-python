@@ -5,6 +5,7 @@
     <title>Question</title>
 </head>
 <body>
+    <a href="/">Back to home page</a>
     <h1>Question</h1>
     <p>ID: {{ question_id }}</p>
     <table>
@@ -50,6 +51,11 @@
     <form action="/question/{{ question_id }}/new-answer" method="get">
         <button type="submit">Add new answer</button>
     </form>
-
+    <form action='/question/{{ question_id }}/vote-up'>
+        <input type="submit" name="vote_it_up" value="Vote up!">
+    </form>
+    <form action='/question/{{ question_id }}/vote-down'>
+        <input type="submit" name="vote_it_down" value="Vote down!">
+    </form>
 </body>
 </html>

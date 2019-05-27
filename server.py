@@ -100,7 +100,20 @@ def new_question():
         return render_template('add_question.html')
 
 
+@app.route('/question/<question_id>/vote-up', methods=['POST', 'GET'])
+def vote_up(question_id):
+    global questions
+    questions[question_id]['vote_number'] += 1
+    connection.write_all_questions(questions)
+    return redirect(f'/question/{question_id}')
 
+
+@app.route('/question/<question_id>/vote-down', methods=['POST', 'GET'])
+def vote_down(question_id):
+    global questions
+    questions[question_id]['vote_number'] -= 1
+    connection.write_all_questions(questions)
+    return redirect(f'/question/{question_id}')
 
 
 if __name__ == '__main__':
