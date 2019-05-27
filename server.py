@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, url_for
-import data_manager
 import connection
 import util
 import uuid
@@ -7,18 +6,13 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-
-questions = data_manager.get_questions()
-answers = data_manager.get_answers()
-
 QUESTION_HEADERS = ['Submission time', 'View number', 'Vote number', 'Title', 'Message', 'Image']
 ANSWER_HEADERS = ['Submission time', 'Vote number', 'Question id', 'Message', 'Image']
 
 @app.route('/')
 @app.route('/list')
 def route_list():
-    global questions
-    questions = data_manager.get_questions()
+    questions = connection.get_all_from_table('question')
     order_by = request.args.get('order_by')
     order_direction = request.args.get('order_direction')
 
@@ -52,8 +46,8 @@ def sorted_dict(dict_, by=None, direction='asc'):
 
 @app.route('/question/<question_id>')
 def display_question(question_id):
-    questions = data_manager.get_questions()
-    answers_for_question = util.get_answers_for_question_id(question_id, answers)
+    questions = connection.get_all_from_table('answer')
+    answers_for_question = connection.get_answers_for_question_id(question_id)
 
     return render_template('question.html', question_id=question_id, answers=answers_for_question, questions=questions, convert=datetime.utcfromtimestamp, int=int)
 
@@ -62,16 +56,15 @@ def display_question(question_id):
 def new_answer(question_id):
     if request.method == 'POST':
         new_answer = dict()
-        id = str(uuid.uuid4())
-        new_answer['submission_time'] = round(datetime.now().timestamp() + 7200)
+        new_answer['id'] = connection.get_answer_id()
+        new_answer['submission_time'] = datetime.now()
         new_answer['vote_number'] = 0
-        new_answer['question_id'] = question_id
+        new_answer['question_id'] = int(question_id)
         new_answer['message'] = request.form.get('message')
         new_answer['image'] = None
-        global answers
-        answers.update({id: new_answer})
-        connection.write_all_answers(answers)
-        answers = data_manager.get_answers()
+
+        connection.new_answer(new_answer)
+
         return redirect(f'/question/{question_id}')
     else:
         return render_template('new_answer.html', question_id=question_id)
