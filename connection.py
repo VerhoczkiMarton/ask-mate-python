@@ -22,8 +22,6 @@ def get_answers_for_question_id(cursor, question_id):
 def new_question(cursor, question):
     pass
 
-
-
 @connection_common.connection_handler
 def new_answer(cursor, answer):
     cursor.execute("""
