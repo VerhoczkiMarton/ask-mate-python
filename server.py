@@ -57,7 +57,7 @@ def new_answer(question_id):
     if request.method == 'POST':
         new_answer = dict()
         new_answer['id'] = connection.get_answer_id()
-        new_answer['submission_time'] = datetime.now()
+        new_answer['submission_time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         new_answer['vote_number'] = 0
         new_answer['question_id'] = question_id
         new_answer['message'] = request.form.get('message')
@@ -77,7 +77,7 @@ def new_question():
         id = connection.get_question_id()
 
         new_question['id'] = id
-        new_question['submission_time'] = datetime.now()
+        new_question['submission_time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         new_question['view_number'] = 0
         new_question['vote_number'] = 0
         new_question['title'] = request.form.get('title')
