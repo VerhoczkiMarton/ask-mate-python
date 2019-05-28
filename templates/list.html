@@ -22,29 +22,28 @@
 <table>
     <tr>
         {% for header in headers %}
-        <th> {{ header }}</th>
+            <th> {{ header }}</th>
         {% endfor %}
     </tr>
     {% for id, question in questions.items() %}
 
-    <tr>
-        {% for label, value in question.items() %}
-            {% if label == "title" %}
-            <td>
-            <a href="/question/{{ id }}">
-                        {{ value }}
-                    </a>
-            </td>
-            {% elif label == 'submission_time' %}
-                <td>{{ value }}</td>
-            {% else %}
-                <td> {{ value }} </td>
-            {% endif %}
-        {% endfor %}
-    </tr>
+        <tr>
+            {% for label, value in question.items() %}
+                {% if label == "title" %}
+                    <td>
+                        <a href="/question/{{ id }}">
+                            {{ value }}
+                        </a>
+                    </td>
+                {% elif label == 'submission_time' %}
+                    <td>{{ convert(int(value)) }}</td>
+                {% else %}
+                    <td> {{ value }} </td>
+                {% endif %}
+            {% endfor %}
+        </tr>
 
     {% endfor %}
 </table>
 </body>
 </html>
-.
