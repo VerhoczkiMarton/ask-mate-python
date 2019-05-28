@@ -20,7 +20,7 @@
         <tr>
         {% for title, cell in questions[question_id].items() %}
                 {% if title == 'submission_time' %}
-                    <td>{{ convert(int(cell)) }}</td>
+                    <td>{{ cell }}</td>
                 {% else %}
                     <td> {{ cell }} </td>
                 {% endif %}
@@ -36,14 +36,10 @@
             <th>Message</th>
             <th>image</th>
         </tr>
-        {% for answer in answers %}
+        {% for answer in answers.values() %}
         <tr>
             {% for title, cell in answer.items() %}
-                {% if title == 'submission_time' %}
-                    <td>{{ convert(int(cell)) }}</td>
-                {% else %}
                     <td> {{ cell }} </td>
-                {% endif %}
             {% endfor %}
         </tr>
         {% endfor %}

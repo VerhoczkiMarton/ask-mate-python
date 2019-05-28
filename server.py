@@ -19,8 +19,6 @@ def route_list():
     return render_template('list.html',
                            questions=sorted_dict(questions, order_by, order_direction),
                            headers=QUESTION_HEADERS,
-                           convert=datetime.utcfromtimestamp,
-                           int=int,
                            sorted=sorted)
 
 
@@ -44,12 +42,13 @@ def sorted_dict(dict_, by=None, direction='asc'):
     return ordered_dict
 
 
-@app.route('/question/<question_id>')
+@app.route('/question/<int:question_id>')
 def display_question(question_id):
-    questions = connection.get_all_from_table('answer')
+    questions = connection.get_all_from_table('question')
     answers_for_question = connection.get_answers_for_question_id(question_id)
 
-    return render_template('question.html', question_id=question_id, answers=answers_for_question, questions=questions, convert=datetime.utcfromtimestamp, int=int)
+    return render_template('question.html', question_id=question_id, answers=answers_for_question,
+                           questions=questions)
 
 
 @app.route('/question/<question_id>/new-answer', methods=['GET', 'POST'])
@@ -83,27 +82,21 @@ def new_question():
         new_question['title'] = request.form.get('title')
         new_question['message'] = request.form.get('message')
         new_question['image'] = None
-
-       connection.new_question(new_question)
-
+        connection.new_question(new_question)
         return redirect('/')
     elif request.method == 'GET':
         return render_template('add_question.html')
 
 
-@app.route('/question/<question_id>/vote-up', methods=['POST', 'GET'])
+@app.route('/question/<int:question_id>/vote-up', methods=['POST', 'GET'])
 def vote_up(question_id):
-    global questions
-    questions[question_id]['vote_number'] += 1
-    connection.write_all_questions(questions)
+    connection.vote_up(question_id)
     return redirect(f'/question/{question_id}')
 
 
-@app.route('/question/<question_id>/vote-down', methods=['POST', 'GET'])
+@app.route('/question/<int:question_id>/vote-down', methods=['POST', 'GET'])
 def vote_down(question_id):
-    global questions
-    questions[question_id]['vote_number'] -= 1
-    connection.write_all_questions(questions)
+    connection.vote_down(question_id)
     return redirect(f'/question/{question_id}')
 
 

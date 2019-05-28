@@ -20,7 +20,12 @@ def get_answers_for_question_id(cursor, question_id):
 
 @connection_common.connection_handler
 def new_question(cursor, question):
-    pass
+    cursor.execute("""
+        INSERT INTO question 
+        VALUES (%(id)s, %(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s)
+        """, {'id': question['id'], 'submission_time': question['submission_time'], 'view_number': question['view_number'], 'vote_number': question['vote_number'],
+              'title': question['title'], 'message': question['message'], 'image': question['image']})
+
 
 @connection_common.connection_handler
 def new_answer(cursor, answer):
@@ -46,3 +51,21 @@ def get_question_id(cursor):
     FROM question
     """)
     return cursor.fetchall()[0]['id']
+
+
+@connection_common.connection_handler
+def vote_up(cursor, question_id):
+    cursor.execute("""
+    UPDATE question
+    SET vote_number=vote_number+1
+    WHERE id=%(question_id)s
+                   """, {'question_id': question_id})
+
+
+@connection_common.connection_handler
+def vote_down(cursor, question_id):
+    cursor.execute("""
+    UPDATE question
+    SET vote_number=vote_number-1
+    WHERE id=%(question_id)s
+                   """, {'question_id': question_id})
