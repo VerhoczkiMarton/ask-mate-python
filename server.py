@@ -18,8 +18,7 @@ def route_list():
 
     return render_template('list.html',
                            questions=sorted_dict(questions, order_by, order_direction),
-                           headers=QUESTION_HEADERS,
-                           sorted=sorted)
+                           headers=QUESTION_HEADERS)
 
 
 def sorted_dict(dict_, by=None, direction='asc'):
@@ -47,18 +46,20 @@ def display_question(question_id):
     questions = connection.get_all_from_table('question')
     answers_for_question = connection.get_answers_for_question_id(question_id)
 
-    return render_template('question.html', question_id=question_id, answers=answers_for_question,
+    return render_template('question.html',
+                           question_id=question_id,
+                           answers=answers_for_question,
                            questions=questions)
 
 
-@app.route('/question/<question_id>/new-answer', methods=['GET', 'POST'])
+@app.route('/question/<int:question_id>/new-answer', methods=['GET', 'POST'])
 def new_answer(question_id):
     if request.method == 'POST':
         new_answer = dict()
         new_answer['id'] = connection.get_answer_id()
         new_answer['submission_time'] = datetime.now()
         new_answer['vote_number'] = 0
-        new_answer['question_id'] = int(question_id)
+        new_answer['question_id'] = question_id
         new_answer['message'] = request.form.get('message')
         new_answer['image'] = None
 

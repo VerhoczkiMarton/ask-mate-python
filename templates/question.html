@@ -19,11 +19,7 @@
         </tr>
         <tr>
         {% for title, cell in questions[question_id].items() %}
-                {% if title == 'submission_time' %}
-                    <td>{{ cell }}</td>
-                {% else %}
-                    <td> {{ cell }} </td>
-                {% endif %}
+            <td> {{ cell }} </td>
         {% endfor %}
         </tr>
     </table>
