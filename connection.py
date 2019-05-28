@@ -69,3 +69,14 @@ def vote_down(cursor, question_id):
     SET vote_number=vote_number-1
     WHERE id=%(question_id)s
                    """, {'question_id': question_id})
+
+
+@connection_common.connection_handler
+def get_latest_5_questions(cursor):
+    cursor.execute("""
+    SELECT *
+    FROM question
+    ORDER BY submission_time DESC 
+    LIMIT 5
+    """)
+    return data_manager.convert_data_structure(cursor.fetchall())
