@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
 import connection
-import util
-import uuid
 from datetime import datetime
 
 app = Flask(__name__)
@@ -99,6 +97,20 @@ def vote_up(question_id):
 def vote_down(question_id):
     connection.vote_down(question_id)
     return redirect(f'/question/{question_id}')
+
+
+@app.route('/question/<int:question_id>/edit', methods=['GET', 'POST'])
+def edit_question(question_id):
+    if request.method == 'GET':
+        question = connection.get_question_by_question_id(question_id)
+        return render_template('edit_question.html', question=question, question_id=question_id)
+    elif request.method  == 'POST':
+        message=request.form.get('message')
+        title=request.form.get('title')
+        connection.edit_question(question_id, message, title)
+        return redirect(f'/question/{question_id}')
+
+
 
 
 if __name__ == '__main__':
