@@ -8,8 +8,34 @@
     {% else %}
     <title>AskMate</title>
     {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="topnav">
+    <a class="active" href="/list">Home</a>
+    <a href="/add-question">Ask a new question</a>
+    <form action="/list" method="get">
+    <div class="box">
+    <select name="order_direction">
+        {% if not order_direction %} <option value="" selected disabled hidden>Choose here</option> {% endif %}
+        <option value="asc" {% if order_direction == 'asc' %} selected="selected"{% endif %}>Ascending</option>
+        <option value="desc" {% if order_direction == 'desc' %} selected="selected"{% endif %}>Descending</option>
+    </select>
+    </div>
+    <div class="box">
+    <select name="order_by">
+        {% if not order_by %} <option value="" selected disabled hidden>Choose here</option> {% endif %}
+        <option value="title" {% if order_by == 'title' %} selected="selected"{% endif %}>Title</option>
+        <option value="submission_time" {% if order_by == 'submission_time' %} selected="selected"{% endif %}>Date</option>
+        <option value="view_number" {% if order_by == 'view_number' %} selected="selected"{% endif %}>View Number</option>
+        <option value="vote_number" {% if order_by == 'vote_number' %} selected="selected"{% endif %}>Vote number</option>
+    </select>
+    </div>
+    <button type="submit">Order</button>
+    </form>
+    </div>
+    <div class="content">
     {% block content%} {% endblock%}
+    </div>
 </body>
 </html>
