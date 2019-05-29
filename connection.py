@@ -69,3 +69,29 @@ def vote_down(cursor, question_id):
     SET vote_number=vote_number-1
     WHERE id=%(question_id)s
                    """, {'question_id': question_id})
+
+@connection_common.connection_handler
+def edit_answer(cursor,edited_answer_message, answer_id):
+    cursor.execute("""
+    UPDATE answer
+    SET message = %(edited_answer_message)s
+    WHERE id = %(answer_id)s
+    """, {'edited_answer_message': edited_answer_message, 'answer_id': answer_id})
+
+
+@connection_common.connection_handler
+def get_question_id_by_answer_id(cursor, answer_id):
+    cursor.execute("""
+    SELECT question_id FROM answer
+    WHERE id = %(answer_id)s
+    """, {'answer_id':answer_id})
+    return cursor.fetchone()['question_id']
+
+
+@connection_common.connection_handler
+def get_answer_by_id(cursor, answer_id):
+    cursor.execute("""
+    SELECT * FROM answer
+    WHERE id = %(answer_id)s
+    """, {'answer_id':answer_id})
+    return cursor.fetchone()

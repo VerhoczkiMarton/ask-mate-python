@@ -32,11 +32,14 @@
             <th>Message</th>
             <th>image</th>
         </tr>
-        {% for answer in answers.values() %}
+        {% for id, answer in answers.items() %}
         <tr>
             {% for title, cell in answer.items() %}
                     <td> {{ cell }} </td>
             {% endfor %}
+            <td>
+                <a href="/answer/{{ id }}/edit">Edit answer</a>
+            </td>
         </tr>
         {% endfor %}
     </table>

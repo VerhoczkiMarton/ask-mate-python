@@ -45,7 +45,6 @@ def sorted_dict(dict_, by=None, direction='asc'):
 def display_question(question_id):
     questions = connection.get_all_from_table('question')
     answers_for_question = connection.get_answers_for_question_id(question_id)
-
     return render_template('question.html',
                            question_id=question_id,
                            answers=answers_for_question,
@@ -100,6 +99,17 @@ def vote_down(question_id):
     connection.vote_down(question_id)
     return redirect(f'/question/{question_id}')
 
+
+@app.route('/answer/<int:answer_id>/edit', methods=['POST', 'GET'])
+def edit_answer(answer_id):
+    if request.method == 'GET':
+        answer = connection.get_answer_by_id(answer_id)
+        return render_template("edit_answer.html", answer_id=answer_id , answer_message=answer['message'])
+    elif request.method == 'POST':
+        edited_answer_message = request.form.get('message')
+        connection.edit_answer(edited_answer_message, answer_id)
+        question_id = connection.get_question_id_by_answer_id(answer_id)
+        return redirect(f'/question/{question_id}')
 
 if __name__ == '__main__':
     app.run(
