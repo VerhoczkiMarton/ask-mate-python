@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Latest Questions</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
     <a href="/list">See all questions</a>
     <a href="/add-question">Ask a new question</a>
     <table>
@@ -30,5 +25,4 @@
 
         {% endfor %}
     </table>
-</body>
-</html>
+{% endblock content %}

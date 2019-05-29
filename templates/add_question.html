@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
+{% extends "layout.html" %}}
         <title>Ask a question</title>
-    </head>
-<body>
+{% block content %}
     <h1>Ask a question </h1>
       <form action="/add-question" method="post">
           <br>
@@ -18,5 +15,4 @@
           <br>
           <button type="submit">Add new question</button>
       </form>
-</body>
-</html>
+{% endblock content %}

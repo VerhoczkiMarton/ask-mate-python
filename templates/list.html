@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Questions</title>
-</head>
+{% extends "layout.html" %}
+{% block content %}
 <body>
 <form action="/list" method="get">
     <select name="order_direction">
@@ -45,5 +41,4 @@
 
     {% endfor %}
 </table>
-</body>
-</html>
+{% endblock content %}

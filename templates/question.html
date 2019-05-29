@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Question</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
     <a href="/">Back to home page</a>
     <h1>Question</h1>
     <p>ID: {{ question_id }}</p>
@@ -61,5 +56,4 @@
     <form action='/question/{{ question_id }}/vote-down'>
         <input type="submit" name="vote_it_down" value="Vote down!">
     </form>
-</body>
-</html>
+{% endblock content %}

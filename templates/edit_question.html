@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Edit question</title>
-    </head>
-<body>
+{% extends layout.html %}
+{% block content %}
     <h1>Edit question </h1>
       <form action="/question/{{ question_id }}/edit" method="post">
           <br>
@@ -18,5 +14,4 @@
           <br>
           <button type="submit">Edit question </button>
       </form>
-</body>
-</html>
+{% endblock content %}

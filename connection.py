@@ -138,9 +138,6 @@ def get_latest_5_questions(cursor):
 @connection_common.connection_handler
 def delete_answer(cursor, answer_id):
     cursor.execute("""
-    DELETE FROM comment
-    WHERE answer_id = %(answer_id)s;
-    
     DELETE from answer
     WHERE id = %(answer_id)s;
     """, {'answer_id': answer_id})

@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <title>Edit answer</title>
-</head>
-<body>
-<body>
+{% extends "layout.html" %}
+{% block content %}
 <h1>Edit answer</h1>
 <form action="/answer/{{ answer_id }}/edit" method="post">
     <textarea name="message"> {{ answer_message }}</textarea>
     <button type="submit">Edit answer</button>
 </form>
-</body>
+{% endblock content %}

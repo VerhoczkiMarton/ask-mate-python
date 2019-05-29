@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add new answer</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
     <h1>Add new answer to id:  {{ question_id }}</h1>
     <form action="/question/{{ question_id }}/new-answer" method="post">
         <textarea name="message">Enter message...</textarea>
         <button type="submit">Add new answer</button>
     </form>
 </form>
-</body>
-</html>
+{% endblock content %}
