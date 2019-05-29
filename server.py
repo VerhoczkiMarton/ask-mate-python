@@ -7,16 +7,24 @@ app = Flask(__name__)
 QUESTION_HEADERS = ['Submission time', 'View number', 'Vote number', 'Title', 'Message', 'Image']
 ANSWER_HEADERS = ['Submission time', 'Vote number', 'Question id', 'Message', 'Image']
 
+
 @app.route('/')
+def list_all():
+    questions = connection.get_latest_5_questions()
+    return render_template('index.html',
+                           questions=questions,
+                           headers=QUESTION_HEADERS)
+
+
 @app.route('/list')
-def route_list():
+def list_last_5():
     questions = connection.get_all_from_table('question')
     order_by = request.args.get('order_by')
     order_direction = request.args.get('order_direction')
 
     return render_template('list.html',
                            questions=sorted_dict(questions, order_by, order_direction),
-                           headers=QUESTION_HEADERS)
+                           headers=QUESTION_HEADERS, order_by=order_by, order_direction=order_direction)
 
 
 def sorted_dict(dict_, by=None, direction='asc'):

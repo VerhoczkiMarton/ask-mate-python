@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Latest Questions</title>
+</head>
+<body>
+    <a href="/list">See all questions</a>
+    <a href="/add-question">Ask a new question</a>
+    <table>
+        <tr>
+            {% for header in headers %}
+                <th> {{ header }}</th>
+            {% endfor %}
+        </tr>
+        {% for id, question in questions.items() %}
+            <tr>
+                {% for label, value in question.items() %}
+                    {% if label == "title" %}
+                        <td>
+                            <a href="/question/{{ id }}">
+                                {{ value }}
+                            </a>
+                        </td>
+                    {% else %}
+                        <td> {{ value }} </td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+
+        {% endfor %}
+    </table>
+</body>
+</html>

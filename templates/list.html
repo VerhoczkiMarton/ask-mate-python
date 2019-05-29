@@ -7,14 +7,16 @@
 <body>
 <form action="/list" method="get">
     <select name="order_direction">
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
+        {% if not order_direction %} <option value="" selected disabled hidden>Choose here</option> {% endif %}
+        <option value="asc" {% if order_direction == 'asc' %} selected="selected"{% endif %}>Ascending</option>
+        <option value="desc" {% if order_direction == 'desc' %} selected="selected"{% endif %}>Descending</option>
     </select>
     <select name="order_by">
-        <option value="title">Title</option>
-        <option value="submission_time">Date</option>
-        <option value="view_number">View Number</option>
-        <option value="vote_number">Vote number</option>
+        {% if not order_by %} <option value="" selected disabled hidden>Choose here</option> {% endif %}
+        <option value="title" {% if order_by == 'title' %} selected="selected"{% endif %}>Title</option>
+        <option value="submission_time" {% if order_by == 'submission_time' %} selected="selected"{% endif %}>Date</option>
+        <option value="view_number" {% if order_by == 'view_number' %} selected="selected"{% endif %}>View Number</option>
+        <option value="vote_number" {% if order_by == 'vote_number' %} selected="selected"{% endif %}>Vote number</option>
     </select>
     <button type="submit">Order</button>
 </form>

@@ -94,3 +94,15 @@ def delete_question(cursor, question_id):
     DELETE FROM question
     WHERE id = %(id)s
     """, {'id': question_id,})
+
+
+
+@connection_common.connection_handler
+def get_latest_5_questions(cursor):
+    cursor.execute("""
+    SELECT *
+    FROM question
+    ORDER BY submission_time DESC 
+    LIMIT 5
+    """)
+    return data_manager.convert_data_structure(cursor.fetchall())
