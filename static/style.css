@@ -81,7 +81,7 @@ tbody tr:hover {
   float: left;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  padding: 20px 16px;
   text-decoration: none;
   font-size: 17px;
 }
@@ -97,42 +97,37 @@ tbody tr:hover {
     background-color: #4CAF50;
     color: white;
 }
-
 .topnav form {
-    float: right;
+  float: right;
+}
+.topnav button{
+  width: 120px;
+  height: 20px;
+  background-color: rebeccapurple;
+  border: 0px;
+
 }
 
 
-/* Select */
 
 
-.box select {
-  background-color: #0563af;
-  color: white;
-  width: 100px;
-    height: 20px;
-  border: none;
-  font-size: 15px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  -webkit-appearance: button;
-  outline: none;
+/*Select*/
+
+select {
+  /* General styling */
+  height: 20px;
+  width: 120px;
+  border-radius: 0;
+  padding-left: 10px;
+
+  /* Removes the default <select> styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* Positions background arrow image */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC');
+  background-repeat: no-repeat;
+  background-position: right;
 }
 
-.box::before {
-  font-family: FontAwesome;
-  text-align: center;
-  font-size: 28px;
-  line-height: 45px;
-  color: rgba(255, 255, 255, 0.5);
-  background-color: rgba(255, 255, 255, 0.1);
-  pointer-events: none;
-}
-
-.box:hover::before {
-  color: rgba(255, 255, 255, 0.6);
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.box select option {
-  padding: 30px;
-}

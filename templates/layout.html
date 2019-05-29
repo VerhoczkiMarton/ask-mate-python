@@ -14,6 +14,7 @@
     <div class="topnav">
     <a class="active" href="/list">Home</a>
     <a href="/add-question">Ask a new question</a>
+    <a href="/">Latest 5</a>
     <form action="/list" method="get">
     <div class="box">
     <select name="order_direction">
@@ -34,6 +35,7 @@
     <button type="submit">Order</button>
     </form>
     </div>
+    <br><br>
     <div class="content">
     {% block content%} {% endblock%}
     </div>
