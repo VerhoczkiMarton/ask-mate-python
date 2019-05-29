@@ -115,13 +115,12 @@ def edit_question(cursor, question_id, message, title):
     WHERE id = %(id)s
                    """, {'id': question_id, 'title': title, 'message': message})
 
-
 @connection_common.connection_handler
 def delete_question(cursor, question_id):
-    cursor.execute("""
+    cursor.execute(""" 
     DELETE FROM question
-    WHERE id = %(id)s
-    """, {'id': question_id})
+    WHERE id = %(question_id)s;
+    """, {'question_id': question_id})
 
 
 @connection_common.connection_handler
