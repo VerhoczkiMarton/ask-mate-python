@@ -70,6 +70,7 @@ def vote_down(cursor, question_id):
     WHERE id=%(question_id)s
                    """, {'question_id': question_id})
 
+
 @connection_common.connection_handler
 def edit_answer(cursor,edited_answer_message, answer_id):
     cursor.execute("""
@@ -93,9 +94,8 @@ def get_answer_by_id(cursor, answer_id):
     cursor.execute("""
     SELECT * FROM answer
     WHERE id = %(answer_id)s
-    """, {'answer_id':answer_id})
+    """, {'answer_id': answer_id})
     return cursor.fetchone()
-
 
 
 @connection_common.connection_handler
@@ -115,13 +115,13 @@ def edit_question(cursor, question_id, message, title):
     WHERE id = %(id)s
                    """, {'id': question_id, 'title': title, 'message': message})
 
+
 @connection_common.connection_handler
 def delete_question(cursor, question_id):
     cursor.execute("""
     DELETE FROM question
     WHERE id = %(id)s
-    """, {'id': question_id,})
-
+    """, {'id': question_id})
 
 
 @connection_common.connection_handler
@@ -133,3 +133,14 @@ def get_latest_5_questions(cursor):
     LIMIT 5
     """)
     return data_manager.convert_data_structure(cursor.fetchall())
+
+
+@connection_common.connection_handler
+def delete_answer(cursor, answer_id):
+    cursor.execute("""
+    DELETE FROM comment
+    WHERE answer_id = %(answer_id)s;
+    
+    DELETE from answer
+    WHERE id = %(answer_id)s;
+    """, {'answer_id': answer_id})

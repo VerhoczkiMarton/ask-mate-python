@@ -105,7 +105,7 @@ def vote_down(question_id):
     connection.vote_down(question_id)
     return redirect(f'/question/{question_id}')
 
-
+"""
 @app.route('/question/<int:question_id>/edit', methods=['GET', 'POST'])
 def edit_question(question_id):
     if request.method == 'GET':
@@ -116,7 +116,7 @@ def edit_question(question_id):
         title=request.form.get('title')
         connection.edit_question(question_id, message, title)
         return redirect(f'/question/{question_id}')
-
+"""
 
 
 
@@ -143,7 +143,11 @@ def edit_question(question_id):
         return redirect(f'/question/{question_id}')
 
 
-
+@app.route('/answer/<int:answer_id>/delete')
+def delete_answer(answer_id):
+    question_id = connection.get_question_id_by_answer_id(answer_id)
+    connection.delete_answer(answer_id)
+    return redirect(f'/question/{question_id}')
 
 if __name__ == '__main__':
     app.run(
