@@ -95,3 +95,41 @@ def get_answer_by_id(cursor, answer_id):
     WHERE id = %(answer_id)s
     """, {'answer_id':answer_id})
     return cursor.fetchone()
+
+
+
+@connection_common.connection_handler
+def get_question_by_question_id(cursor, question_id):
+    cursor.execute("""
+    SELECT  * FROM question
+    WHERE id = %(question_id)s
+    """, {'question_id': question_id})
+    return cursor.fetchone()
+
+
+@connection_common.connection_handler
+def edit_question(cursor, question_id, message, title):
+    cursor.execute("""
+    UPDATE question
+    SET  title = %(title)s, message = %(message)s
+    WHERE id = %(id)s
+                   """, {'id': question_id, 'title': title, 'message': message})
+
+@connection_common.connection_handler
+def delete_question(cursor, question_id):
+    cursor.execute("""
+    DELETE FROM question
+    WHERE id = %(id)s
+    """, {'id': question_id,})
+
+
+
+@connection_common.connection_handler
+def get_latest_5_questions(cursor):
+    cursor.execute("""
+    SELECT *
+    FROM question
+    ORDER BY submission_time DESC 
+    LIMIT 5
+    """)
+    return data_manager.convert_data_structure(cursor.fetchall())
