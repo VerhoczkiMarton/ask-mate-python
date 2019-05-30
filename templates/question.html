@@ -1,8 +1,5 @@
 {% extends "layout.html" %}
 {% block content %}
-    <a href="/">Back to home page</a>
-    <h1>Question</h1>
-    <p>ID: {{ question_id }}</p>
      <form action="/question/{{ question_id }}/edit">
         <button type="submit">Edit</button>
     </form>
@@ -24,7 +21,7 @@
         {% endfor %}
         </tr>
     </table>
-    <h2>Answers</h2>
+    <br><br>
     <table>
         <tr>
             <th>Submission time</th>

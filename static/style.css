@@ -7,6 +7,8 @@ table {
   width: 80%;
   margin: 0 auto;
   position: relative;
+  float: left;
+  margin-bottom: 20px;
 }
 table * {
   position: relative;
@@ -99,23 +101,31 @@ tbody tr:hover {
 }
 .topnav form {
   float: right;
+
+
 }
 .topnav button{
   width: 120px;
-  height: 20px;
-  background-color: rebeccapurple;
-  border: 0px;
-
+  height: 59px;
+  background-color: #E8CBC0;
+  border: 0;
 }
 
+.topnav button:hover {
+  background-color: #b39992;
+}
 
-
+body{
+  padding: 0px;
+  margin:  0px;
+}
 
 /*Select*/
 
 select {
   /* General styling */
-  height: 20px;
+  top: 0;
+  height: 50px;
   width: 120px;
   border-radius: 0;
   padding-left: 10px;
@@ -129,5 +139,45 @@ select {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC');
   background-repeat: no-repeat;
   background-position: right;
+}
+
+/* Background */
+body {
+    background: linear-gradient(45deg , #E8CBC0, #636FA4);
+    height: 100vh;
+    margin: 0;
+    background-repeat: no-repeat;
+}
+
+button {
+  padding: 0px;
+}
+
+/* Button */
+button, input {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 7%;
+  background-color: white;
+  color: black;
+  border: 2px solid #e7e7e7;
+  float: right;
+}
+
+table#main{
+  float: none;
+}
+
+button#sort {
+  height: 40px;
 }
 
