@@ -108,12 +108,12 @@ def get_question_by_question_id(cursor, question_id):
 
 
 @connection_common.connection_handler
-def edit_question(cursor, question_id, message, title):
+def edit_question(cursor, question_id, message, title, image):
     cursor.execute("""
     UPDATE question
-    SET  title = %(title)s, message = %(message)s
+    SET  title = %(title)s, message = %(message)s, image=%(image)s
     WHERE id = %(id)s
-                   """, {'id': question_id, 'title': title, 'message': message})
+                   """, {'id': question_id, 'title': title, 'message': message, 'image': image})
 
 @connection_common.connection_handler
 def delete_question(cursor, question_id):

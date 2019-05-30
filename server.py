@@ -114,7 +114,8 @@ def edit_question(question_id):
     elif request.method  == 'POST':
         message=request.form.get('message')
         title=request.form.get('title')
-        connection.edit_question(question_id, message, title)
+        image = request.form.get('image')
+        connection.edit_question(question_id, message, title, image)
         return redirect(f'/question/{question_id}')
 
 
