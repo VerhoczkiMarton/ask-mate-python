@@ -11,7 +11,7 @@
           <textarea  id="message" name="message" rows="20">{{ question['message'] }} </textarea>
           <br>
           <label for="image"> Image</label>
-          <input id="image" name="image" type="text">
+          <input id="image" name="image" type="text" value="{{ question['image'] }}">
           <br>
           <button type="submit">Edit question </button>
       </form>
