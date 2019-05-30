@@ -20,8 +20,8 @@
                             {{ value }}
                         </a>
                     </td>
-                {% elif title == 'image' %}
-                    <td> <img src="{{ cell }}"> </td>
+                {% elif label == 'image' %}
+                    <td> <img src="{{ value }}"/> </td>
                 {% else %}
                     <td> {{ value }} </td>
                 {% endif %}
