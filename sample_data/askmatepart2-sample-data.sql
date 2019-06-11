@@ -60,6 +60,12 @@ CREATE TABLE tag (
     name text
 );
 
+DROP TABLE IF EXISTS public.user;
+CREATE TABLE user (
+    username text UNIQUE NOT NULL,
+    password text NOT NULL
+);
+
 
 ALTER TABLE ONLY answer
     ADD CONSTRAINT pk_answer_id PRIMARY KEY (id);
