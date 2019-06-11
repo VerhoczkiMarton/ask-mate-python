@@ -63,7 +63,8 @@ CREATE TABLE tag (
 DROP TABLE IF EXISTS public.users;
 CREATE TABLE users (
     username text UNIQUE NOT NULL,
-    password text NOT NULL
+    password text NOT NULL,
+    registration_date date
 );
 
 
