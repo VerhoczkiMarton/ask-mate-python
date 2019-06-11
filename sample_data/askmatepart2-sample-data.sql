@@ -60,8 +60,8 @@ CREATE TABLE tag (
     name text
 );
 
-DROP TABLE IF EXISTS public.user;
-CREATE TABLE user (
+DROP TABLE IF EXISTS public.users;
+CREATE TABLE users (
     username text UNIQUE NOT NULL,
     password text NOT NULL
 );
@@ -96,6 +96,9 @@ ALTER TABLE ONLY comment
 
 ALTER TABLE ONLY question_tag
     ADD CONSTRAINT fk_tag_id FOREIGN KEY (tag_id) REFERENCES tag(id);
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT pk_username PRIMARY KEY (username);
 
 INSERT INTO question VALUES (0, '2017-04-28 08:29:00', 29, 7, 'How to make lists in Python?', 'I am totally new to this, any hints?', NULL);
 INSERT INTO question VALUES (1, '2017-04-29 09:19:00', 15, 9, 'Wordpress loading multiple jQuery Versions', 'I developed a plugin that uses the jquery booklet plugin (http://builtbywill.com/booklet/#/) this plugin binds a function to $ so I cann call $(".myBook").booklet();
