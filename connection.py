@@ -23,7 +23,8 @@ def new_question(cursor, question):
     cursor.execute("""
         INSERT INTO question 
         VALUES (%(id)s, %(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s)
-        """, {'id': question['id'], 'submission_time': question['submission_time'], 'view_number': question['view_number'], 'vote_number': question['vote_number'],
+        """, {'id': question['id'], 'submission_time': question['submission_time'],
+              'view_number': question['view_number'], 'vote_number': question['vote_number'],
               'title': question['title'], 'message': question['message'], 'image': question['image']})
 
 
@@ -32,7 +33,8 @@ def new_answer(cursor, answer):
     cursor.execute("""
     INSERT INTO answer 
     VALUES (%(id)s, %(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s)
-    """, {'id': answer['id'], 'submission_time': answer['submission_time'], 'vote_number': answer['vote_number'], 'question_id': answer['question_id'], 'message': answer['message'], 'image': answer['image']})
+    """, {'id': answer['id'], 'submission_time': answer['submission_time'], 'vote_number': answer['vote_number'],
+          'question_id': answer['question_id'], 'message': answer['message'], 'image': answer['image']})
 
 
 @connection_common.connection_handler
@@ -72,7 +74,7 @@ def vote_down(cursor, question_id):
 
 
 @connection_common.connection_handler
-def edit_answer(cursor,edited_answer_message, answer_id):
+def edit_answer(cursor, edited_answer_message, answer_id):
     cursor.execute("""
     UPDATE answer
     SET message = %(edited_answer_message)s
@@ -85,7 +87,7 @@ def get_question_id_by_answer_id(cursor, answer_id):
     cursor.execute("""
     SELECT question_id FROM answer
     WHERE id = %(answer_id)s
-    """, {'answer_id':answer_id})
+    """, {'answer_id': answer_id})
     return cursor.fetchone()['question_id']
 
 
@@ -111,9 +113,10 @@ def get_question_by_question_id(cursor, question_id):
 def edit_question(cursor, question_id, message, title, image):
     cursor.execute("""
     UPDATE question
-    SET  title = %(title)s, message = %(message)s, image=%(image)s
+    SET  title = %(title)s, message = %(message)s, image = %(image)s
     WHERE id = %(id)s
                    """, {'id': question_id, 'title': title, 'message': message, 'image': image})
+
 
 @connection_common.connection_handler
 def delete_question(cursor, question_id):
@@ -140,3 +143,27 @@ def delete_answer(cursor, answer_id):
     DELETE from answer
     WHERE id = %(answer_id)s;
     """, {'answer_id': answer_id})
+
+
+@connection_common.connection_handler
+def add_user(cursor, new_user):
+    cursor.execute("""
+    INSERT INTO users
+    VALUES (%(username)s, %(password)s, %(salt)s, %(registration_date)s)
+    """, {'username': new_user['username'],
+          'password': new_user['hashed_password'],
+          'salt': new_user['salt'],
+          'registration_date': new_user['registration_date']})
+
+
+@connection_common.connection_handler
+def username_already_exists(cursor, username):
+    cursor.execute("""
+    SELECT username FROM users
+    WHERE username ILIKE %(username)s
+    """, {'username': username})
+    query_to_test = cursor.fetchone()
+    if query_to_test:
+        return True
+    else:
+        return False

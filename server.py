@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import connection
 from datetime import datetime
+import util
 
 app = Flask(__name__)
 
@@ -142,6 +143,23 @@ def delete_answer(answer_id):
     question_id = connection.get_question_id_by_answer_id(answer_id)
     connection.delete_answer(answer_id)
     return redirect(f'/question/{question_id}')
+
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    if request.method == 'POST':
+        new_user = dict()
+        new_user['username'] = request.form.get('username')
+        new_user['hashed_password'], new_user['salt'] = util.hash_password(request.form.get('password'))
+        new_user['registration_date'] =datetime.now()
+        username_already_exists = connection.username_already_exists(new_user['username'])
+        if username_already_exists:
+            return render_template('register.html', username_already_exists=username_already_exists)
+        else:
+            connection.add_user(new_user)
+            return redirect('/')
+    elif request.method == 'GET':
+        return render_template('register.html', username_already_exists=False)
 
 
 if __name__ == '__main__':
