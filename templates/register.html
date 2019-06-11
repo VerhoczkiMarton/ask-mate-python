@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+{% block content %}
+    <div {{ 'hidden' if not username_already_exists  }} class="username_already_exists">
+    <p>Username already exists :(</p>
+    </div>
+    <form action="/register" method="post">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text">
 
-</body>
-</html>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password">
+
+        <button type="submit">Register</button>
+    </form>
+{% endblock %}
