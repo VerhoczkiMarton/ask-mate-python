@@ -1,18 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
+    <div align="center">
     <h1>Edit question </h1>
       <form action="/question/{{ question_id }}/edit" method="post">
-          <br>
           <label for="title">Title</label>
           <input id="title" name="title" type="text" value="{{ question['title'] }}">
-          <br>
           <label for="message">Message</label>
-          <br>
-          <textarea  id="message" name="message" rows="20">{{ question['message'] }} </textarea>
-          <br>
+          <textarea  id="message" name="message" rows="10">{{ question['message'] }} </textarea>
           <label for="image"> Image</label>
           <input id="image" name="image" type="text" value="{{ question['image'] }}">
-          <br>
           <button type="submit">Edit question </button>
       </form>
+    </div>
 {% endblock content %}
