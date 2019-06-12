@@ -187,6 +187,12 @@ def logout():
     return redirect('/')
 
 
+@app.route('/list-users')
+def list_all_users():
+    all_users = connection.get_all_users()
+    return render_template('all_users.html', all_users=all_users)
+
+
 if __name__ == '__main__':
     app.run(
         debug=True,
