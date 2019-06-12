@@ -1,9 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
+    <div class="icons">
     <a href="/question/{{ question_id }}/edit"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
     <a href="/question/{{ question_id }}/delete"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
     <a href="/question/{{ question_id }}/vote-up"><i class="fa fa-caret-up fa-2x" aria-hidden="true"></i></a>
     <a href="/question/{{ question_id }}/vote-down"><i class="fa fa-caret-down fa-2x" aria-hidden="true"></i></a>
+    </div>
     <table>
         <tr>
             <th>Submission time</th>
