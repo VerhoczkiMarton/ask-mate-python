@@ -188,3 +188,12 @@ def validate_password(cursor, username, password):
         return True
     else:
         return False
+
+
+@connection_common.connection_handler
+def get_all_users(cursor):
+    cursor.execute("""
+    SELECT username, registration_date
+    FROM users
+    """)
+    return cursor.fetchall()

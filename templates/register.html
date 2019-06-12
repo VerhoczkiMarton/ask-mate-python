@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div {{ 'hidden' if not username_already_exists  }} align="center" class="username_already_exists">
+    <div align="center">
+    <div {{ 'hidden' if not username_already_exists  }} class="username_already_exists">
     <p>Username already exists :(</p>
     </div>
     <form action="/register" method="post">
@@ -12,4 +13,5 @@
 
         <button type="submit">Register</button>
     </form>
+    </div>
 {% endblock %}

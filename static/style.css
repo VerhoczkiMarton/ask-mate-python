@@ -65,6 +65,10 @@ td, th {
     padding: 10px 7px;
 }
 
+.allusers{
+    text-align: center;
+}
+
 i {
     color: black;
     margin: 5px;
