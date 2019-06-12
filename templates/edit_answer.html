@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div align="center">
+    <div align="center" class="card">
 <h1>Edit answer</h1>
 <form action="/answer/{{ answer_id }}/edit" method="post">
     <textarea name="message"> {{ answer_message }}</textarea>

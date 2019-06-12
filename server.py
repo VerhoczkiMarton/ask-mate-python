@@ -90,7 +90,7 @@ def new_question():
         new_question['vote_number'] = 0
         new_question['title'] = request.form.get('title')
         new_question['message'] = request.form.get('message')
-        new_question['image'] = None
+        new_question['image'] = request.form.get('image')
         connection.new_question(new_question)
         return redirect('/')
     elif request.method == 'GET':

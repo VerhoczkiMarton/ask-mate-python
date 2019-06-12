@@ -34,7 +34,9 @@ body {
 }
 
 img {
+    object-fit: cover;
     height: 80px;
+    width: 80px;
 }
 
 /* Background */
@@ -55,6 +57,7 @@ table{
     box-shadow: 0 0 5px #888;
     align-self: center;
     width: 90%;
+    border-radius: 5px;
 }
 
 th {
@@ -91,6 +94,7 @@ button {
     padding: 7px;
     border-radius: 4px;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Fonts */
@@ -122,4 +126,20 @@ select {
 
 .login, .loggedid {
     float: right;
+}
+
+.card {
+    padding: 20px;
+    background-color: #00000020;
+    width: 250px;
+    margin: auto;
+    border-radius: 6px;
+}
+
+.card h1, .card label {
+    text-shadow: white 2.5px 1px;
+}
+
+input, textarea {
+    width: 175px;
 }

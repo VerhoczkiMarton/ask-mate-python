@@ -18,8 +18,8 @@
         <tr>
         {% for title, cell in questions[question_id].items() %}
             {% if title == 'image' %}
-                {% if value %}
-                    <td><img src="{{ value }}"/></td>
+                {% if cell %}
+                    <td><img src="{{ cell }}"/></td>
                 {% else %}
                     <td><img src="{{ url_for('static', filename='logo.png') }}" alt="image"/></td>
                 {% endif %}
@@ -37,7 +37,8 @@
             <th>Question id</th>
             <th>Message</th>
             <th>image</th>
-            <th colspan="2"><a id="new_answer" href="/question/{{ question_id }}/new-answer"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
+            <th></th>
+            <th><a id="new_answer" href="/question/{{ question_id }}/new-answer"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
 </th>
         </tr>
         {% for id, answer in answers.items() %}
