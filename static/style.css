@@ -116,6 +116,6 @@ select {
     margin-bottom: 10px;
 }
 
-.login {
+.login, .loggedid {
     float: right;
 }

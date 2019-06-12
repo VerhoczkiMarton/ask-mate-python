@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import connection
 from datetime import datetime
 import util
+import os
 
 app = Flask(__name__)
+app.secret_key = os.urandom(50)
 
 QUESTION_HEADERS = ['Submission time', 'View number', 'Vote number', 'Title', 'Message', 'Image']
 ANSWER_HEADERS = ['Submission time', 'Vote number', 'Question id', 'Message', 'Image']
@@ -160,6 +162,29 @@ def register():
             return redirect('/')
     elif request.method == 'GET':
         return render_template('register.html', username_already_exists=False)
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html', invalid=False)
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        valid = connection.validate_password(username, password)
+        if valid:
+            session['active'] = True
+            session['user'] = username
+            return redirect('/')
+        else:
+            return render_template('login.html', invalid=True)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('active', None)
+    session.pop('user', None)
+    return redirect('/')
 
 
 if __name__ == '__main__':
