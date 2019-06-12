@@ -1,5 +1,6 @@
 import connection_common
 import data_manager
+import util
 
 
 @connection_common.connection_handler
@@ -149,7 +150,7 @@ def delete_answer(cursor, answer_id):
 def add_user(cursor, new_user):
     cursor.execute("""
     INSERT INTO users
-    VALUES (%(username)s, %(password)s, %(salt)s, %(registration_date)s)
+    VALUES (%(username)s, %(salt)s, %(password)s, %(registration_date)s)
     """, {'username': new_user['username'],
           'password': new_user['hashed_password'],
           'salt': new_user['salt'],
@@ -164,6 +165,26 @@ def username_already_exists(cursor, username):
     """, {'username': username})
     query_to_test = cursor.fetchone()
     if query_to_test:
+        return True
+    else:
+        return False
+
+
+@connection_common.connection_handler
+def validate_password(cursor, username, password):
+    cursor.execute("""
+    SELECT salt, password, username
+    FROM users
+    WHERE username = %(username)s
+    """, {'username': username})
+    try:
+        db_credentials = cursor.fetchall()[0]
+    except BaseException:
+        return False
+    auth_string = db_credentials['username'] + db_credentials['password']
+
+    user_auth_string = username + util.hash_password_with_custom_salt(password, db_credentials['salt'])
+    if auth_string == user_auth_string:
         return True
     else:
         return False

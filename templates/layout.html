@@ -17,9 +17,13 @@
         <a href="/list">Home</a>
         <a href="/">Latest 5</a>
         <a href="/add-question">Ask a new question</a>
-        <div class="login">
+        <div class="login" {{ 'hidden' if session['active'] }}>
         <a href="/register">Register</a>
         <a href="/login">Login</a>
+        </div>
+        <div class="loggedid" {{ 'hidden' if not session['active'] }}>
+            <a>{{ session['user'] }}</a>
+            <a href="/logout">Logout</a>
         </div>
     </div>
     <br><br>
