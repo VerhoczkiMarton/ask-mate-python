@@ -82,3 +82,18 @@ button {
     padding: 7px;
     border-radius: 4px;
 }
+
+/* Fonts */
+
+h1, h2, th {
+    font-family: 'Didact Gothic', sans-serif;
+}
+
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+.topnav a {
+    font-family: 'Didact Gothic', sans-serif;
+    font-weight: bold;
+}
