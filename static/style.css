@@ -36,3 +36,10 @@ body {
 img {
     height: 80px;
 }
+
+/* Background */
+
+body {
+    background-image: url(https://images.pexels.com/photos/768943/pexels-photo-768943.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=650&w=940);
+    background-size: cover;
+}
