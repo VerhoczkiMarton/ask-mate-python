@@ -72,3 +72,13 @@ i {
 #new_answer {
     margin-left: 30%;
 }
+
+/* buttons*/
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: 0;
+    padding: 7px;
+    border-radius: 4px;
+}
