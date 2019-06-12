@@ -63,3 +63,12 @@ th {
 td, th {
     padding: 10px 7px;
 }
+
+i {
+    color: black;
+    margin: 5px;
+}
+
+#new_answer {
+    margin-left: 30%;
+}
