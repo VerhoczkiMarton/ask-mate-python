@@ -111,3 +111,11 @@ input, label {
 label {
     margin-bottom: 10px !important;
 }
+
+select {
+    margin-bottom: 10px;
+}
+
+.login {
+    float: right;
+}
