@@ -1,9 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Add new answer to id:  {{ question_id }}</h1>
+    <div class="new_answer" align="center">
+    <h1>Add new answer</h1>
     <form action="/question/{{ question_id }}/new-answer" method="post">
+        <label for="message">Message</label>
         <textarea name="message">Enter message...</textarea>
-        <button type="submit">Add new answer</button>
+        <br>
+        <button name="add_answer_button" type="submit">Add new answer</button>
     </form>
-</form>
+    </div>
 {% endblock content %}

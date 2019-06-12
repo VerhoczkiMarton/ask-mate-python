@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-     <form action="/question/{{ question_id }}/edit">
-        <button type="submit">Edit</button>
-    </form>
-    <form action="/question/{{ question_id }}/delete">
-        <button type="submit">Delete</button>
-    </form>
+    <div class="icons">
+    <a href="/question/{{ question_id }}/edit"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
+    <a href="/question/{{ question_id }}/delete"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
+    <a href="/question/{{ question_id }}/vote-up"><i class="fa fa-caret-up fa-2x" aria-hidden="true"></i></a>
+    <a href="/question/{{ question_id }}/vote-down"><i class="fa fa-caret-down fa-2x" aria-hidden="true"></i></a>
+    </div>
     <table>
         <tr>
             <th>Submission time</th>
@@ -18,7 +18,11 @@
         <tr>
         {% for title, cell in questions[question_id].items() %}
             {% if title == 'image' %}
-            <td> <img src="{{ cell }}"> </td>
+                {% if value %}
+                    <td><img src="{{ value }}"/></td>
+                {% else %}
+                    <td><img src="{{ url_for('static', filename='logo.png') }}" alt="image"/></td>
+                {% endif %}
             {% else %}
             <td> {{ cell }} </td>
             {% endif %}
@@ -33,6 +37,8 @@
             <th>Question id</th>
             <th>Message</th>
             <th>image</th>
+            <th colspan="2"><a id="new_answer" href="/question/{{ question_id }}/new-answer"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
+</th>
         </tr>
         {% for id, answer in answers.items() %}
         <tr>
@@ -40,21 +46,12 @@
                     <td> {{ cell }} </td>
             {% endfor %}
             <td>
-                <a href="/answer/{{ id }}/edit">Edit answer</a>
+                <a href="/answer/{{ id }}/edit"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
             </td>
             <td>
-                <a href="/answer/{{ id }}/delete">Delete answer</a>
+                <a href="/answer/{{ id }}/delete"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
             </td>
         </tr>
         {% endfor %}
     </table>
-    <form action="/question/{{ question_id }}/new-answer" method="get">
-        <button type="submit">Add new answer</button>
-    </form>
-    <form action='/question/{{ question_id }}/vote-up'>
-        <input type="submit" name="vote_it_up" value="Vote up!">
-    </form>
-    <form action='/question/{{ question_id }}/vote-down'>
-        <input type="submit" name="vote_it_down" value="Vote down!">
-    </form>
 {% endblock content %}
