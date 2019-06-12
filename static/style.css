@@ -43,3 +43,23 @@ body {
     background-image: url(https://images.pexels.com/photos/768943/pexels-photo-768943.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=650&w=940);
     background-size: cover;
 }
+
+/* Table */
+
+table{
+    margin-left:auto;
+    margin-right:auto;
+    background-color: rgba(255, 246, 246, 0.95);
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px#888;
+    box-shadow: 0 0 5px #888;
+    align-self: center;
+}
+
+th {
+    background-color: #f8eae6;
+}
+
+td, th {
+    padding: 10px 7px;
+}
