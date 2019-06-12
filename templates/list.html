@@ -43,7 +43,11 @@
                         </a>
                     </td>
                 {% elif label == 'image' %}
-                    <td> <img src="{{ value }}"/> </td>
+                        {% if value %}
+                            <td><img src="{{ value }}"/></td>
+                        {% else %}
+                            <td><img src="{{ url_for('static', filename='logo.png') }}" alt="image"/></td>
+                        {% endif %}
                 {% else %}
                     <td> {{ value }} </td>
                 {% endif %}

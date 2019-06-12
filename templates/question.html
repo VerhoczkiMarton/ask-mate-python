@@ -18,7 +18,11 @@
         <tr>
         {% for title, cell in questions[question_id].items() %}
             {% if title == 'image' %}
-            <td> <img src="{{ cell }}"> </td>
+                {% if value %}
+                    <td><img src="{{ value }}"/></td>
+                {% else %}
+                    <td><img src="{{ url_for('static', filename='logo.png') }}" alt="image"/></td>
+                {% endif %}
             {% else %}
             <td> {{ cell }} </td>
             {% endif %}
