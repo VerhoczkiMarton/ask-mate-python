@@ -1,5 +1,4 @@
 import connection_common
-import data_manager
 import util
 
 
@@ -7,7 +6,7 @@ import util
 def get_all_from_table(cursor, table):
     query = "SELECT * FROM " + table
     cursor.execute(query)
-    return data_manager.convert_data_structure(cursor.fetchall())
+    return util.convert_data_structure(cursor.fetchall())
 
 
 @connection_common.connection_handler
@@ -16,7 +15,7 @@ def get_answers_for_question_id(cursor, question_id):
     SELECT * FROM answer
     WHERE question_id = %(question_id)s
     """, {'question_id': question_id})
-    return data_manager.convert_data_structure(cursor.fetchall())
+    return util.convert_data_structure(cursor.fetchall())
 
 
 @connection_common.connection_handler
@@ -135,7 +134,7 @@ def get_latest_5_questions(cursor):
     ORDER BY submission_time DESC 
     LIMIT 5
     """)
-    return data_manager.convert_data_structure(cursor.fetchall())
+    return util.convert_data_structure(cursor.fetchall())
 
 
 @connection_common.connection_handler
