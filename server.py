@@ -52,6 +52,7 @@ def sorted_dict(dict_, by=None, direction='asc'):
 
 @app.route('/question/<int:question_id>')
 def display_question(question_id):
+    connection.view_question(question_id)
     questions = connection.get_all_from_table('question')
     answers_for_question = connection.get_answers_for_question_id(question_id)
     return render_template('question.html',
