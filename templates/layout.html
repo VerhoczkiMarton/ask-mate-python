@@ -1,24 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     {% if title %}
-    <title>{{ title }}</title>
+        <title>{{ title }}</title>
     {% else %}
-    <title>AskMate</title>
+        <title>AskMate</title>
     {% endif %}
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href=" {{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.css') }}">
-     <link href="https://fonts.googleapis.com/css?family=Didact+Gothic|Raleway&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic|Raleway&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="topnav">
-        <a href="/list">Home</a>
-        <a href="/">Latest 5</a>
-        <a href="/list-users">List all users</a>
-        <a href="/add-question">Ask a new question</a>
-        <div class="login" {{ 'hidden' if session['active'] }}>
+<div class="topnav">
+    <a href="/list">Home</a>
+    <a href="/">Latest 5</a>
+    <a href="/list-users">List all users</a>
+    <a href="/add-question">Ask a new question</a>
+    <div class="login" {{ 'hidden' if session['active'] }}>
         <a href="/register">Register</a>
         <a href="/login">Login</a>
         </div>
@@ -27,9 +26,14 @@
             <a href="/logout">Logout</a>
         </div>
     </div>
-    <br><br>
-    <div class="content">
-    {% block content%} {% endblock%}
+    <div class="loggedid" {{ 'hidden' if not session['active'] }}>
+        <a>{{ session['user'] }}</a>
+        <a href="/logout">Logout</a>
     </div>
+</div>
+<br><br>
+<div class="content">
+    {% block content %} {% endblock %}
+</div>
 </body>
 </html>

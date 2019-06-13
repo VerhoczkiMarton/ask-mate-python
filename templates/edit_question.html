@@ -1,15 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
     <div align="center" class="card">
-    <h1>Edit question </h1>
-      <form action="/question/{{ question_id }}/edit" method="post">
-          <label for="title">Title</label>
-          <input id="title" name="title" type="text" value="{{ question['title'] }}">
-          <label for="message">Message</label>
-          <textarea  id="message" name="message" rows="10">{{ question['message'] }} </textarea>
-          <label for="image"> Image</label>
-          <input id="image" name="image" type="text" value="{{ question['image'] }}">
-          <button type="submit">Edit question </button>
-      </form>
+        <h1>Edit question </h1>
+        <form action="/question/{{ question_id }}/edit" method="post">
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text" value="{{ question['title'] }}">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="10">{{ question['message'] }} </textarea>
+            <label for="image"> Image</label>
+            <input id="image" name="image" type="text" value="{{ question['image'] }}">
+            <button type="submit">Edit question</button>
+        </form>
     </div>
 {% endblock content %}

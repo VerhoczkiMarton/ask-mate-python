@@ -1,8 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-import connection
-from datetime import datetime
-import util
 import os
+from datetime import datetime
+
+from flask import Flask, render_template, request, redirect, session
+
+import connection
+import util
+from util import sorted_dict
 
 app = Flask(__name__)
 app.secret_key = os.urandom(50)
@@ -28,26 +31,6 @@ def list_last_5():
     return render_template('list.html',
                            questions=sorted_dict(questions, order_by, order_direction),
                            headers=QUESTION_HEADERS, order_by=order_by, order_direction=order_direction)
-
-
-def sorted_dict(dict_, by=None, direction='asc'):
-    """
-    :param dict_:
-        nested dictionary of questions or answers
-    :param by:
-        order parameter
-    :param direction:
-        asc or desc
-    :return:
-        same data structure as dict_, nested dictionary, ordered
-    """
-    ordered_dict = dict()
-    if not by:
-        by = 'submission_time'
-    sorted_dict = sorted(dict_, key=lambda x: dict_[x][by], reverse=True if direction == 'desc' else False)
-    for element in sorted_dict:
-        ordered_dict.update({element: dict_[element]})
-    return ordered_dict
 
 
 @app.route('/question/<int:question_id>')
@@ -115,9 +98,9 @@ def edit_question(question_id):
     if request.method == 'GET':
         question = connection.get_question_by_question_id(question_id)
         return render_template('edit_question.html', question=question, question_id=question_id)
-    elif request.method  == 'POST':
-        message=request.form.get('message')
-        title=request.form.get('title')
+    elif request.method == 'POST':
+        message = request.form.get('message')
+        title = request.form.get('title')
         image = request.form.get('image')
         connection.edit_question(question_id, message, title, image)
         return redirect(f'/question/{question_id}')
@@ -133,7 +116,7 @@ def delete_question(question_id):
 def edit_answer(answer_id):
     if request.method == 'GET':
         answer = connection.get_answer_by_id(answer_id)
-        return render_template("edit_answer.html", answer_id=answer_id , answer_message=answer['message'])
+        return render_template("edit_answer.html", answer_id=answer_id, answer_message=answer['message'])
     elif request.method == 'POST':
         edited_answer_message = request.form.get('message')
         connection.edit_answer(edited_answer_message, answer_id)
@@ -154,7 +137,7 @@ def register():
         new_user = dict()
         new_user['username'] = request.form.get('username')
         new_user['hashed_password'], new_user['salt'] = util.hash_password(request.form.get('password'))
-        new_user['registration_date'] =datetime.now()
+        new_user['registration_date'] = datetime.now()
         username_already_exists = connection.username_already_exists(new_user['username'])
         if username_already_exists:
             return render_template('register.html', username_already_exists=username_already_exists)
