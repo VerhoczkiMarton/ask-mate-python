@@ -206,3 +206,13 @@ def view_question(cursor, question_id):
     SET view_number = view_number + 1
     WHERE question.id = %(question_id)s
     """, {'question_id': question_id})
+
+
+@connection_common.connection_handler
+def get_registration_date_by_username(cursor, username):
+    cursor.execute("""
+                SELECT registration_date FROM users
+                WHERE username = %(username)s
+                """, {"username": username})
+    reg_date = cursor.fetchall()[0]
+    return reg_date['registration_date']
