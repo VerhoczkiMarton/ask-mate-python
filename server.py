@@ -194,6 +194,12 @@ def list_all_users():
     return render_template('all_users.html', all_users=all_users)
 
 
+@app.route('/user/<username>')
+def user_page(username):
+    reg_date = connection.get_registration_date_by_username(username)
+    return render_template('user_page.html', username=username, reg_date=reg_date)
+
+
 if __name__ == '__main__':
     app.run(
         debug=True,
