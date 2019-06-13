@@ -8,17 +8,21 @@
         </tr>
         {% for id, question in questions.items() %}
             <tr>
-                {% for label, value in question.items() %}
+                {% for label, cell in question.items() %}
                     {% if label == "title" %}
                         <td>
-                            <a href="/question/{{ id }}">
-                                {{ value }}
+                            <a class="left_align" href="/question/{{ id }}">
+                                {{ cell }}
                             </a>
                         </td>
-                     {% elif label == 'image' %}
-                    <td> <img src="{{ value }}" alt="image"/> </td>
+                    {% elif label == 'image' %}
+                        {% if cell %}
+                            <td><img src="{{ cell }}" alt="image"/></td>
+                        {% else %}
+                            <td><img src="{{ url_for('static', filename='logo.png') }}" alt="image"/></td>
+                        {% endif %}
                     {% else %}
-                        <td> {{ value }} </td>
+                        <td class="left_align"> {{ cell }} </td>
                     {% endif %}
                 {% endfor %}
             </tr>

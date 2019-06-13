@@ -1,19 +1,16 @@
 {% extends "layout.html" %}}
-        <title>Ask a question</title>
+<title>Ask a question</title>
 {% block content %}
-    <h1>Ask a question </h1>
-      <form action="/add-question" method="post">
-          <br>
-          <label for="title">Title</label>
-          <input id="title" name="title" type="text">
-          <br>
-          <label for="message">Message</label>
-          <br>
-          <textarea  id="message" name="message" rows="20">Please write the message here </textarea>
-          <br>
-          <label for="image"> Image</label>
-          <input id="image" name="image" type="text">
-          <br>
-          <button type="submit">Add new question</button>
-      </form>
+    <div align="center" class="new_question card">
+        <h1>Ask a question </h1>
+        <form action="/add-question" method="post">
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5">Please write the message here </textarea>
+            <label for="image"> Image</label>
+            <input id="image" name="image" type="text">
+            <button type="submit">Add new question</button>
+        </form>
+    </div>
 {% endblock content %}
