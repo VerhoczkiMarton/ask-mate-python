@@ -1,59 +1,63 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="icons">
-<form action="/list" method="get">
-<select name="order_by">
-    {% if not order_by %}
-        <option value="" selected disabled hidden>Order By</option> {% endif %}
-    <option value="title" {% if order_by == 'title' %} selected="selected"{% endif %}>Title</option>
-    <option value="submission_time" {% if order_by == 'submission_time' %} selected="selected"{% endif %}>Date
-    </option>
-    <option value="view_number" {% if order_by == 'view_number' %} selected="selected"{% endif %}>View Number
-    </option>
-    <option value="vote_number" {% if order_by == 'vote_number' %} selected="selected"{% endif %}>Vote number
-    </option>
-</select>
-<select name="order_direction">
-    {% if not order_direction %}
-        <option value="" selected disabled hidden>Order Direction</option> {% endif %}
-    <option value="asc" {% if order_direction == 'asc' %} selected="selected"{% endif %}>Ascending</option>
-    <option value="desc" {% if order_direction == 'desc' %} selected="selected"{% endif %}>Descending</option>
-</select>
-<button id="sort" type="submit">Sort</button>
+        <form action="/list" method="get">
+            <select name="order_by">
+                {% if not order_by %}
+                    <option value="" selected disabled hidden>Order By</option> {% endif %}
+                <option value="title" {% if order_by == 'title' %} selected="selected"{% endif %}>Title</option>
+                <option value="submission_time" {% if order_by == 'submission_time' %} selected="selected"{% endif %}>
+                    Date
+                </option>
+                <option value="view_number" {% if order_by == 'view_number' %} selected="selected"{% endif %}>View
+                    Number
+                </option>
+                <option value="vote_number" {% if order_by == 'vote_number' %} selected="selected"{% endif %}>Vote
+                    number
+                </option>
+            </select>
+            <select name="order_direction">
+                {% if not order_direction %}
+                    <option value="" selected disabled hidden>Order Direction</option> {% endif %}
+                <option value="asc" {% if order_direction == 'asc' %} selected="selected"{% endif %}>Ascending</option>
+                <option value="desc" {% if order_direction == 'desc' %} selected="selected"{% endif %}>Descending
+                </option>
+            </select>
+            <button id="sort" type="submit">Sort</button>
 
-</form>
+        </form>
     </div>
-<table id="main">
-    <tr>
-        <th>Date</th>
-        <th>View</th>
-        <th>Vote</th>
-        <th>Question</th>
-        <th>Description</th>
-        <th>Image</th>
-    </tr>
-    {% for id, question in questions.items() %}
-
+    <table id="main">
         <tr>
-            {% for label, value in question.items() %}
-                {% if label == "title" %}
-                    <td>
-                        <a href="/question/{{ id }}">
-                            {{ value }}
-                        </a>
-                    </td>
-                {% elif label == 'image' %}
-                        {% if value %}
-                            <td><img src="{{ value }}"/></td>
+            <th>Date</th>
+            <th>View</th>
+            <th>Vote</th>
+            <th>Question</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+        {% for id, question in questions.items() %}
+
+            <tr>
+                {% for label, cell in question.items() %}
+                    {% if label == "title" %}
+                        <td>
+                            <a href="/question/{{ id }}">
+                                {{ cell }}
+                            </a>
+                        </td>
+                    {% elif label == 'image' %}
+                        {% if cell %}
+                            <td><img src="{{ cell }}"/></td>
                         {% else %}
                             <td><img src="{{ url_for('static', filename='logo.png') }}" alt="image"/></td>
                         {% endif %}
-                {% else %}
-                    <td> {{ value }} </td>
-                {% endif %}
-            {% endfor %}
-        </tr>
+                    {% else %}
+                        <td> {{ cell }} </td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
 
-    {% endfor %}
-</table>
+        {% endfor %}
+    </table>
 {% endblock content %}

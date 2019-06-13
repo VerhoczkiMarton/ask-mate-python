@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="icons">
-    <a href="/question/{{ question_id }}/edit"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
-    <a href="/question/{{ question_id }}/delete"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
-    <a href="/question/{{ question_id }}/vote-up"><i class="fa fa-caret-up fa-2x" aria-hidden="true"></i></a>
-    <a href="/question/{{ question_id }}/vote-down"><i class="fa fa-caret-down fa-2x" aria-hidden="true"></i></a>
+        <a href="/question/{{ question_id }}/edit"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
+        <a href="/question/{{ question_id }}/delete"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
+        <a href="/question/{{ question_id }}/vote-up"><i class="fa fa-caret-up fa-2x" aria-hidden="true"></i></a>
+        <a href="/question/{{ question_id }}/vote-down"><i class="fa fa-caret-down fa-2x" aria-hidden="true"></i></a>
     </div>
     <table>
         <tr>
@@ -16,17 +16,17 @@
             <th>image</th>
         </tr>
         <tr>
-        {% for title, cell in questions[question_id].items() %}
-            {% if title == 'image' %}
-                {% if cell %}
-                    <td><img src="{{ cell }}"/></td>
+            {% for title, cell in questions[question_id].items() %}
+                {% if title == 'image' %}
+                    {% if cell %}
+                        <td><img src="{{ cell }}"/></td>
+                    {% else %}
+                        <td><img src="{{ url_for('static', filename='logo.png') }}" alt="image"/></td>
+                    {% endif %}
                 {% else %}
-                    <td><img src="{{ url_for('static', filename='logo.png') }}" alt="image"/></td>
+                    <td> {{ cell }} </td>
                 {% endif %}
-            {% else %}
-            <td> {{ cell }} </td>
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
         </tr>
     </table>
     <br><br>
@@ -38,21 +38,22 @@
             <th>Message</th>
             <th>image</th>
             <th></th>
-            <th><a id="new_answer" href="/question/{{ question_id }}/new-answer"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
-</th>
+            <th><a id="new_answer" href="/question/{{ question_id }}/new-answer"><i class="fa fa-plus fa-2x"
+                                                                                    aria-hidden="true"></i></a>
+            </th>
         </tr>
         {% for id, answer in answers.items() %}
-        <tr>
-            {% for title, cell in answer.items() %}
+            <tr>
+                {% for title, cell in answer.items() %}
                     <td> {{ cell }} </td>
-            {% endfor %}
-            <td>
-                <a href="/answer/{{ id }}/edit"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
-            </td>
-            <td>
-                <a href="/answer/{{ id }}/delete"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
-            </td>
-        </tr>
+                {% endfor %}
+                <td>
+                    <a href="/answer/{{ id }}/edit"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
+                </td>
+                <td>
+                    <a href="/answer/{{ id }}/delete"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
+                </td>
+            </tr>
         {% endfor %}
     </table>
 {% endblock content %}
