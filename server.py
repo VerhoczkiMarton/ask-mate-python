@@ -183,6 +183,18 @@ def user_page(username):
     return render_template('user_page.html', username=username, reg_date=reg_date)
 
 
+@app.route('/search')
+def search():
+    term = request.args.get('term')
+    filtered_questions = connection.search(term)
+    order_by = request.args.get('order_by')
+    order_direction = request.args.get('order_direction')
+    return render_template('list.html',
+                           questions=filtered_questions,
+                           headers=QUESTION_HEADERS, order_by=order_by,
+                           order_direction=order_direction,
+                           term=term)
+
 if __name__ == '__main__':
     app.run(
         debug=True,

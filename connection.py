@@ -215,3 +215,16 @@ def get_registration_date_by_username(cursor, username):
                 """, {"username": username})
     reg_date = cursor.fetchall()[0]
     return reg_date['registration_date']
+
+
+@connection_common.connection_handler
+def search(cursor, term):
+    term = '%' + term + '%'
+    cursor.execute("""
+    SELECT question.*
+    FROM question full join answer on (question.id = answer.question_id)
+    WHERE (question.title ILIKE %(term)s)
+    OR (question.message ILIKE %(term)s)
+    OR (answer.message ILIKE %(term)s);
+    """, {'term': term})
+    return util.convert_data_structure(cursor.fetchall())
