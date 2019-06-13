@@ -20,18 +20,13 @@
     <div class="login" {{ 'hidden' if session['active'] }}>
         <a href="/register">Register</a>
         <a href="/login">Login</a>
-        </div>
-        <div class="loggedid" {{ 'hidden' if not session['active'] }}>
-            <a href="/user/{{  session['user']  }}">{{ session['user'] }}</a>
-            <a href="/logout">Logout</a>
-        </div>
     </div>
     <div class="loggedid" {{ 'hidden' if not session['active'] }}>
-        <a>{{ session['user'] }}</a>
+        <a href="/user/{{ session['user'] }}">{{ session['user'] }}</a>
         <a href="/logout">Logout</a>
     </div>
 </div>
-<br><br>
+<br>
 <div class="content">
     {% block content %} {% endblock %}
 </div>
