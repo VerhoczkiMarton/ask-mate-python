@@ -37,8 +37,7 @@
             <th>Question id</th>
             <th>Message</th>
             <th>image</th>
-            <th></th>
-            <th><a id="new_answer" href="/question/{{ question_id }}/new-answer"><i class="fa fa-plus fa-2x"
+            <th><a href="/question/{{ question_id }}/new-answer"><i class="fa fa-plus fa-2x"
                                                                                     aria-hidden="true"></i></a>
             </th>
         </tr>
@@ -49,8 +48,6 @@
                 {% endfor %}
                 <td>
                     <a href="/answer/{{ id }}/edit"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
-                </td>
-                <td>
                     <a href="/answer/{{ id }}/delete"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
                 </td>
             </tr>

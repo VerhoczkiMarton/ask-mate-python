@@ -11,7 +11,7 @@
                 {% for label, cell in question.items() %}
                     {% if label == "title" %}
                         <td>
-                            <a href="/question/{{ id }}">
+                            <a class="left_align" href="/question/{{ id }}">
                                 {{ cell }}
                             </a>
                         </td>
@@ -22,7 +22,7 @@
                             <td><img src="{{ url_for('static', filename='logo.png') }}" alt="image"/></td>
                         {% endif %}
                     {% else %}
-                        <td> {{ cell }} </td>
+                        <td class="left_align"> {{ cell }} </td>
                     {% endif %}
                 {% endfor %}
             </tr>

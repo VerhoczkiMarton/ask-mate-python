@@ -65,7 +65,7 @@ table {
     -webkit-box-shadow: 0 0 5px #888;
     box-shadow: 0 0 5px #888;
     align-self: center;
-    width: 90%;
+    width: 80%;
     border-radius: 5px;
 }
 
@@ -75,21 +75,25 @@ th {
 
 td, th {
     padding: 10px 7px;
+    text-align: center;
+}
+
+.left_align {
+    text-align: left;
+}
+
+a.left_align {
+     float: left;
 }
 
 /* Icons */
 
 i {
     color: black;
-    margin: 5px;
 }
 
 .icons {
-    margin-left: 5%;
-}
-
-#new_answer {
-    margin-left: 30%;
+    margin-left: 10%;
 }
 
 /* buttons*/
