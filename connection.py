@@ -197,3 +197,12 @@ def get_all_users(cursor):
     FROM users
     """)
     return cursor.fetchall()
+
+
+@connection_common.connection_handler
+def view_question(cursor, question_id):
+    cursor.execute("""
+    UPDATE question
+    SET view_number = view_number + 1
+    WHERE question.id = %(question_id)s
+    """, {'question_id': question_id})
