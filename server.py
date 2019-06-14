@@ -33,9 +33,14 @@ def list_last_5():
                            headers=QUESTION_HEADERS, order_by=order_by, order_direction=order_direction)
 
 
+@app.route('/statistics/<int:question_id>')
+def statistics(question_id):
+    connection.view_question(question_id)
+    return redirect(f'/question/{question_id}')
+
+
 @app.route('/question/<int:question_id>')
 def display_question(question_id):
-    connection.view_question(question_id)
     questions = connection.get_all_from_table('question')
     answers_for_question = connection.get_answers_for_question_id(question_id)
     return render_template('question.html',
